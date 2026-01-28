@@ -4,7 +4,7 @@ import Form from './components/Form';
 import Switch from './components/Switch';
 import HousingGrid from './components/UnitsList'; 
 import Profile from './components/Profile'; 
-import ChatMAMA from './components/ChatMAMA'; 
+import ChatMAMA from './components/chatMAMA';
 import AddProperty from './components/AddProperty'; 
 import './App.css';
 
