@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import Navbar from './Navbar'; 
+import Navbar from './navbar'; 
 import Switch from './Switch'; 
 
 const Profile = ({ isDarkMode, setIsDarkMode, setActivePage, favorites = {}, setFavorites }) => {
@@ -93,9 +93,9 @@ const Profile = ({ isDarkMode, setIsDarkMode, setActivePage, favorites = {}, set
             <Switch isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
           </div>
           <div className="nav-center-area">
-            <div className="nav-wrapper-ltr">
+            <div className="nav-center-area">
               <Navbar setActivePage={setActivePage} isDarkMode={isDarkMode} />
-            </div>
+            </div>  
           </div>
           <div className="logo-section left-align" onClick={() => setActivePage('home')}>
               <svg viewBox="0 0 500 150" style={{ width: '150px', overflow: 'visible' }}>
@@ -138,8 +138,13 @@ const Profile = ({ isDarkMode, setIsDarkMode, setActivePage, favorites = {}, set
                 <button className={activeTab === 'meal-booking' ? 'active' : ''} onClick={() => setActiveTab('meal-booking')}>حجز الوجبات</button>
               )}
               {userType === 'owner' && (
-                <button className="special-btn" onClick={() => setActivePage('add-property')}>عرض وحدتك السكنية</button>
-              )}
+              <button 
+                className="special-btn" 
+                onClick={() => setActivePage('manage-properties')} // تغيير الوجهة هنا
+              >
+                إدارة وحداتك السكنية
+              </button>
+)}
               <button className={activeTab === 'support' ? 'active' : ''} onClick={() => setActiveTab('support')}>الدعم الفني</button>
             </nav>
           </aside>
@@ -510,8 +515,15 @@ const FullWidthHeader = styled.header`
     justify-content: space-between; align-items: center; height: 100%; padding: 0 30px; 
   }
 
-  .nav-center-area { 
-    flex: 2; display: flex; justify-content: center; align-items: center; height: 100%; margin-right: 60px; 
+ .nav-center-area { 
+    flex: 2; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 55px; /* حددنا ارتفاع ثابت أصغر من الهيدر لتبدو ككبسولة */
+    margin-right: 30px;
+    margin-top: -15px; /* هذه القيمة هي التي ترفع المكون للأعلى، يمكنك زيادتها (مثلاً -20px) حسب رغبتك */
+    border-radius: 20px; /* لعمل الحواف الدائرية مثل الصورة */
   }
 
   .nav-wrapper-ltr { 

@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-import ShowUnite from './ShowUnite'; // 1. استيراد الملف الجديد
+import ShowUnite from './ShowUnite'; 
 
-const UnitsList = ({ isDarkMode, favorites, setFavorites }) => {
+// أضفنا setActivePage للمدخلات (Props) ليتمكن الزر من تغيير الصفحة
+const UnitsList = ({ isDarkMode, favorites, setFavorites, setActivePage }) => {
   const [selectedGov, setSelectedGov] = useState('سوهاج');
   const [selectedArea, setSelectedArea] = useState('سيد');
   const [selectedGender, setSelectedGender] = useState('أنثى');
   const [loadingMore, setLoadingMore] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
 
-  // --- الإضافات للربط ---
-  const [showModal, setShowModal] = useState(false); // للتحكم في فتح النافذة
-  const [selectedUnitData, setSelectedUnitData] = useState(null); // لتخزين بيانات الكارت المختار
-  // ----------------------
+  const [showModal, setShowModal] = useState(false); 
+  const [selectedUnitData, setSelectedUnitData] = useState(null); 
 
   const locationsMap = {
     'سوهاج': ['سيد', 'ستى', 'الشهيد', 'الثقافة'],
@@ -181,7 +180,6 @@ const UnitsList = ({ isDarkMode, favorites, setFavorites }) => {
               </div>
             </div>
 
-            {/* تم التعديل هنا: عند الضغط يتم تخزين البيانات وفتح النافذة */}
             <button 
               className="action-btn" 
               onClick={() => {
@@ -195,11 +193,20 @@ const UnitsList = ({ isDarkMode, favorites, setFavorites }) => {
         ))}
       </div>
 
-      <button className="load-more-btn" onClick={() => {setLoadingMore(true); setTimeout(()=>setLoadingMore(false), 800)}}>
+      {/* التعديل هنا: عند الضغط يتم الانتقال لصفحة الكل */}
+      <button 
+        className="load-more-btn" 
+        onClick={() => {
+            setLoadingMore(true); 
+            setTimeout(() => {
+                setLoadingMore(false);
+                if (setActivePage) setActivePage('Show_all_unite'); // اسم الصفحة المطلوب عرضها
+            }, 800);
+        }}
+      >
         {loadingMore ? 'جاري التحميل...' : 'عرض المزيد من الوحدات'}
       </button>
 
-      {/* استدعاء ملف تفاصيل السكن (ShowUnite) */}
       {showModal && (
         <ShowUnite 
           isDarkMode={isDarkMode} 

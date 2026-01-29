@@ -45,6 +45,8 @@ const StyledWrapper = styled.div`
     padding: 0.6rem; 
     background-color: #ff751f; 
     display: flex; 
+    /* التعديل الجوهري هنا */
+    flex-direction: row-reverse; /* لعكس ترتيب الأيقونات بصرياً */
     justify-content: center; 
     align-items: center;
     border-radius: 18px; 
